@@ -1,6 +1,6 @@
 # Circle-Junction-Re
 
-Trying to rewrite the small demo (Circle-Junction)[https://github.com/fccm/Circle-Junction/] in ReScript.
+Trying to rewrite the small demo [Circle-Junction](https://github.com/fccm/Circle-Junction/) in ReScript.
 
 A simple game where you can play with colored circles.
 
