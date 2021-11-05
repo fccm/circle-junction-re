@@ -53,8 +53,8 @@ type mouse_event = {
 @send external fillRect: (context, int, int, int, int) => unit = "fillRect"
 @send external arc: (context, float, float, float, float, float, bool) => unit = "arc"
 
-@send external width: Dom.element => int = "width"
-@send external height: Dom.element => int = "height"
+@get external width: Dom.element => int = "width"
+@get external height: Dom.element => int = "height"
 
 @val external doc: document = "document"
 

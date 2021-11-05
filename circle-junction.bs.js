@@ -10,9 +10,9 @@ var canvas = document.getElementById("my_canvas");
 
 var ctx = canvas.getContext("2d");
 
-var w = canvas.width();
+var w = canvas.width;
 
-var h = canvas.height();
+var h = canvas.height;
 
 var rect = canvas.getBoundingClientRect();
 
