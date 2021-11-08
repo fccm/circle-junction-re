@@ -1,6 +1,10 @@
 BSC = bsc
+ESBUILD = esbuild
 
-all: circle-junction.bs.js
+all: circle-junction.out.js
+
+circle-junction.out.js: circle-junction.bs.js
+	$(ESBUILD) $< --bundle --outfile=$@
 
 circle-junction.bs.js: circle-junction.res
 	$(BSC) $< > $@
