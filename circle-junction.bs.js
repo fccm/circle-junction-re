@@ -2,9 +2,8 @@
 'use strict';
 
 var Js_math = require("./bs-platform/lib/js/js_math.js");
-var Belt_Array = require("./bs-platform/lib/js/belt_Array.js");
+var Caml_array = require("./bs-platform/lib/js/caml_array.js");
 var Caml_int32 = require("./bs-platform/lib/js/caml_int32.js");
-var Belt_Option = require("./bs-platform/lib/js/belt_Option.js");
 
 var canvas = document.getElementById("my_canvas");
 
@@ -41,7 +40,7 @@ function ev_mouse(ev) {
   var x = ev.clientX - rect.left | 0;
   var y = ev.clientY - rect.top | 0;
   for(var i = 0 ,i_finish = circles.length; i < i_finish; ++i){
-    var c = Belt_Option.getExn(Belt_Array.get(circles, i));
+    var c = Caml_array.get(circles, i);
     var lx = x - c.x;
     var ly = y - c.y;
     if (lx * lx + ly * ly < c.r * c.r) {
@@ -116,7 +115,7 @@ function draw_circle(c) {
   if (c.collided) {
     ctx.fillStyle = "#888";
   } else {
-    var color = Belt_Option.getExn(Belt_Array.get(colors, c.color));
+    var color = Caml_array.get(colors, c.color);
     ctx.fillStyle = "hsla(" + color + ", 80%, 60%, 0.6)";
   }
   ctx.beginPath();
@@ -141,15 +140,14 @@ function animate(param) {
   ctx.fillRect(0, 0, w, h);
   var circles_length = circles.length;
   for(var i = 0; i < circles_length; ++i){
-    var _c = Belt_Array.get(circles, i);
-    var c = Belt_Option.getExn(_c);
+    var c = Caml_array.get(circles, i);
     step_circle(c);
     draw_circle(c);
   }
   for(var i$1 = 0 ,i_finish = circles_length - 2 | 0; i$1 <= i_finish; ++i$1){
-    var ci = Belt_Option.getExn(Belt_Array.get(circles, i$1));
+    var ci = Caml_array.get(circles, i$1);
     for(var j = i$1 + 1 | 0; j < circles_length; ++j){
-      var cj = Belt_Option.getExn(Belt_Array.get(circles, j));
+      var cj = Caml_array.get(circles, j);
       if (circles_collide(ci, cj)) {
         circles_collided(ci, cj);
         circles.sort(sort_circles);
@@ -170,9 +168,9 @@ function new_loc(c) {
 var circles_length = circles.length;
 
 for(var i = 0 ,i_finish = circles_length - 2 | 0; i <= i_finish; ++i){
-  var ci = Belt_Option.getExn(Belt_Array.get(circles, i));
+  var ci = Caml_array.get(circles, i);
   for(var j = i + 1 | 0; j < circles_length; ++j){
-    var cj = Belt_Option.getExn(Belt_Array.get(circles, j));
+    var cj = Caml_array.get(circles, j);
     if (circles_collide(ci, cj)) {
       next_color(ci);
     }
