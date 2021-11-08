@@ -1,4 +1,3 @@
-open Belt
 
 type document  // abstract type for a document object
 
@@ -103,7 +102,7 @@ let ev_mouse = (ev) => {
     let y = Belt.Int.toFloat( ev.clientY - rect.top )
 
     for i in 0 to Js.Array.length(circles) - 1 {
-        let c = Option.getExn(circles[i])
+        let c = circles[i]
 
         let lx = x -. c.x
         let ly = y -. c.y
@@ -181,7 +180,7 @@ let draw_circle = (c) => {
     if (c.collided) {
         ctx.fillStyle = "#888"
     } else {
-        let color = Option.getExn( colors[c.color] )
+        let color = colors[c.color]
         ctx.fillStyle = "hsla(" ++ color ++ ", 80%, 60%, 0.6)"
     }
     beginPath(ctx)
@@ -205,17 +204,16 @@ let animate = () => {
     let circles_length = Js.Array.length(circles)
 
     for i in 0 to circles_length - 1 {
-        let _c = circles[i]
-        let c = Option.getExn(_c)
+        let c = circles[i]
         step_circle(c)
         draw_circle(c)
     }
 
     for i in 0 to circles_length - 2 {
-        let ci = Option.getExn(circles[i])
+        let ci = circles[i]
 
         for j in i + 1 to circles_length - 1 {
-            let cj = Option.getExn(circles[j])
+            let cj = circles[j]
 
             if (circles_collide(ci, cj)) {
                 circles_collided(ci, cj)
@@ -239,10 +237,10 @@ let new_loc = (c) => {
     let circles_length = Js.Array.length(circles)
 
     for i in 0 to circles_length - 2 {
-        let ci = Option.getExn(circles[i])
+        let ci = circles[i]
 
         for j in i + 1 to circles_length - 1 {
-            let cj = Option.getExn(circles[j])
+            let cj = circles[j]
 
             if circles_collide(ci, cj) {
                 next_color(ci)
